@@ -1,7 +1,5 @@
 require("dotenv").config();
-const stripe = require("stripe")(
-  "sk_test_51LFFU0IzfmS7pHpEZBQH5CRKrMCran9goN7ssdUenCChbNL51KN0MXrpD0IU6P3zLLnZdeq7d0itywEyyT8awtff00042YP5El"
-);
+const stripe = require("stripe")(`${process.env.STRIPE_KEY}`);
 const { v4: uuidv4 } = require("uuid");
 const Order = require("../models/orderModel");
 const userModel = require("../models/userModel");

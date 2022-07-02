@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
 
@@ -17,12 +18,14 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use("/", getAndroidRouter);
 app.use("/", userRouter);
 app.use("/", orderRouter);
-const localuri = "mongodb://localhost:27017/AndroidShop";
 
-mongoose.connect(localuri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  `mongodb+srv://${process.env.USER_NAME}:${process.env.DATA_BASE_PASS}@cluster0.1huq997.mongodb.net/${process.env.DATA_BASE}?retryWrites=true&w=majority`,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
